@@ -10,6 +10,7 @@ import { CartComponent } from './cart/cart.component';
 import { ErrorComponent } from './error/error.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { PopularItemComponent } from './home/popular-item/popular-item.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FooterComponent } from './footer/footer.component';
     CartComponent,
     ErrorComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    PopularItemComponent
   ],
   imports: [
     BrowserModule,
