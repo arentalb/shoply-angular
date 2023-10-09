@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { PopularItemComponent } from './home/popular-item/popular-item.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { NewArrivalsComponent } from './home/new-arrivals/new-arrivals.component';
+import { FollowUsComponent } from './home/follow-us/follow-us.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NewArrivalsComponent } from './home/new-arrivals/new-arrivals.component
     FooterComponent,
     PopularItemComponent,
     ProductCardComponent,
-    NewArrivalsComponent
+    NewArrivalsComponent,
+    FollowUsComponent
   ],
   imports: [
     BrowserModule,
