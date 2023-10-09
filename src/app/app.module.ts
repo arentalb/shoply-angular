@@ -11,6 +11,7 @@ import { ErrorComponent } from './error/error.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PopularItemComponent } from './home/popular-item/popular-item.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PopularItemComponent } from './home/popular-item/popular-item.component
     ErrorComponent,
     HeaderComponent,
     FooterComponent,
-    PopularItemComponent
+    PopularItemComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
