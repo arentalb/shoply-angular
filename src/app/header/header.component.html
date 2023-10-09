@@ -1,1 +1,34 @@
-<p>header works!</p>
+<header>
+  <div class="flex justify-between px-10 py-4">
+
+    <div class="sm:flex sm:justify-between sm:w-screen">
+      <p class="text-2xl font-bold"><a href="#">SHOPLY</a></p>
+      <div [hidden]="close" class="sm:flex sm:justify-center sm:items-center sm:space-x-6 space-x-0 ">
+        <ul class="sm:flex  sm:space-x-8 text-lg py-3 sm:py-0 ">
+          <li class="p-2  border-2 border-orange-200 my-2 sm:border-0 sm:my-0"><a href="#">Product</a></li>
+          <li class="p-2  border-2 border-orange-200 my-2 sm:border-0 sm:my-0"><a href="#">Sale</a></li>
+          <li class="p-2  border-2 border-orange-200 my-2 sm:border-0 sm:my-0"><a href="#">Cart</a></li>
+        </ul>
+        <div class=" sm:flex sm:flex-row sm:space-x-6 space-x-3 ">
+          <input class="  px-3 py-1.5  w-44 rounded border-2 gap-2 font-semibold" placeholder="search" type="text">
+          <button class=" bg-orange-500 px-3 py-1.5  text-white text-center  rounded shadow font-semibold">search
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sm:flex">
+
+      <div class="flex flex-col justify-end items-end">
+        <div class="sm:hidden inline-block">
+          <img (click)="toggle()" [hidden]="burger" alt="" class="w-6 h-6" src="assets/images/burger.svg">
+          <img (click)="toggle()" [hidden]="close" alt="" class="w-6 h-6" src="../../assets/images/close.svg">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+

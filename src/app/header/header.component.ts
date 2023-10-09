@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
+  close :boolean = true;
+  burger :boolean= false;
+  toggle(){
+    this.burger = !this.burger
+    this.close = !this.close
+  }
 }
