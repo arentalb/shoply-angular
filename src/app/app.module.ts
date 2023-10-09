@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PopularItemComponent } from './home/popular-item/popular-item.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { NewArrivalsComponent } from './home/new-arrivals/new-arrivals.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     HeaderComponent,
     FooterComponent,
     PopularItemComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    NewArrivalsComponent
   ],
   imports: [
     BrowserModule,
