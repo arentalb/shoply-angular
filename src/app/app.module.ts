@@ -19,6 +19,10 @@ import { FavorateDetailComponent } from './cart/favorate-detail/favorate-detail.
 import { CartCardComponent } from './cart/cart-detail/cart-card/cart-card.component';
 import { CartCheckoutComponent } from './cart/cart-detail/cart-checkout/cart-checkout.component';
 import { FavorateCardComponent } from './cart/favorate-detail/favorate-card/favorate-card.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderComponent } from './checkout/order/order.component';
+import { OrderDetailComponent } from './checkout/order-detail/order-detail.component';
+import { ShippingAddressComponent } from './checkout/order-detail/shipping-address/shipping-address.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,10 @@ import { FavorateCardComponent } from './cart/favorate-detail/favorate-card/favo
     CartCardComponent,
     CartCheckoutComponent,
     FavorateCardComponent,
+    CheckoutComponent,
+    OrderComponent,
+    OrderDetailComponent,
+    ShippingAddressComponent,
   ],
   imports: [
     BrowserModule,
