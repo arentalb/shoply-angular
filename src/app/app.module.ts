@@ -14,6 +14,10 @@ import { PopularItemComponent } from './home/popular-item/popular-item.component
 import { ProductCardComponent } from './product-card/product-card.component';
 import { NewArrivalsComponent } from './home/new-arrivals/new-arrivals.component';
 import { FollowUsComponent } from './home/follow-us/follow-us.component';
+import { CartDetailComponent } from './cart/cart-detail/cart-detail.component';
+import { FavorateDetailComponent } from './cart/favorate-detail/favorate-detail.component';
+import { CartCardComponent } from './cart/cart-detail/cart-card/cart-card.component';
+import { CartCheckoutComponent } from './cart/cart-detail/cart-checkout/cart-checkout.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { FollowUsComponent } from './home/follow-us/follow-us.component';
     PopularItemComponent,
     ProductCardComponent,
     NewArrivalsComponent,
-    FollowUsComponent
+    FollowUsComponent,
+    CartDetailComponent,
+    FavorateDetailComponent,
+    CartCardComponent,
+    CartCheckoutComponent,
   ],
   imports: [
     BrowserModule,
