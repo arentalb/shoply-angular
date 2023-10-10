@@ -18,6 +18,7 @@ import { CartDetailComponent } from './cart/cart-detail/cart-detail.component';
 import { FavorateDetailComponent } from './cart/favorate-detail/favorate-detail.component';
 import { CartCardComponent } from './cart/cart-detail/cart-card/cart-card.component';
 import { CartCheckoutComponent } from './cart/cart-detail/cart-checkout/cart-checkout.component';
+import { FavorateCardComponent } from './cart/favorate-detail/favorate-card/favorate-card.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CartCheckoutComponent } from './cart/cart-detail/cart-checkout/cart-che
     FavorateDetailComponent,
     CartCardComponent,
     CartCheckoutComponent,
+    FavorateCardComponent,
   ],
   imports: [
     BrowserModule,
