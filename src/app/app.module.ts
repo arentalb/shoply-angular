@@ -23,6 +23,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderComponent } from './checkout/order/order.component';
 import { OrderDetailComponent } from './checkout/order-detail/order-detail.component';
 import { ShippingAddressComponent } from './checkout/order-detail/shipping-address/shipping-address.component';
+import { OrderCardComponent } from './checkout/order/order-card/order-card.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ShippingAddressComponent } from './checkout/order-detail/shipping-addre
     OrderComponent,
     OrderDetailComponent,
     ShippingAddressComponent,
+    OrderCardComponent,
   ],
   imports: [
     BrowserModule,
