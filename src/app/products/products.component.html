@@ -22,59 +22,42 @@
     <!--main-->
   <div class="sm:flex ">
     <!--fillter drop down -->
-    <div class="shadow border rounded-md shadow-gray-50 p-4 mb-8 sm:h-96">
+    <div class="shadow border rounded-md shadow-gray-50 p-2 w-[300px] sm:w-[400px] md:w-[600px] mb-8 h-fit">
 
 <!--      category-->
-      <div class="flex justify-between items-center px-2 py-4 w-48 rounded-md hover:bg-orange-200 ">
-        <p>category</p>
-       <button>
+      <div class="flex justify-between items-center  py-4 px-6 rounded-md hover:bg-orange-200 ">
+        <p class="font-bold">categories</p>
+       <button (click)="toggleCategories()">
          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
          </svg>
        </button>
       </div>
-      <!--      women-->
 
-      <div class="flex  justify-between items-center px-2 py-4 w-48  rounded-md ml-4 mt-2 hover:bg-orange-200">
+      <div *ngIf="CategoriesState">
+        <div *ngFor="let cate of categories ;let i = index">
+          <div  class="flex  justify-between items-center py-4 px-6 rounded-md ml-4 mt-2 hover:bg-orange-200">
 
-          <p>women</p>
-          <button>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-          </button>
-
-
-      </div>
-      <!--      women options-->
-
-      <div class="flex  flex-col items-start px-2 py-4 w-48 rounded-md ml-8 mt-2 ">
-        <div class="flex justify-between items-center space-x-3">
-          <input id="shirts" type="radio">
-          <label for="shirts">shirts</label>
+            <p class="font-semibold">{{cate.toString()}}</p>
+            <button (click)="toggleCategory(i)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+          </div>
+         <div *ngIf="isCategoryOpen(i)">
+           <div *ngFor="let subCat of subcategories" class="flex  flex-col items-start py-1 px-6  rounded-md ml-8 mt-2 ">
+             <div class="flex justify-between items-center space-x-3">
+               <input id="shirts" type="radio">
+               <label for="shirts">{{subCat}}</label>
+             </div>
+           </div>
+         </div>
         </div>
-        <div class="flex justify-between items-center space-x-3">
-          <input id="dress" type="radio">
-          <label for="dress">dress</label>
-        </div>
-        <div class="flex justify-between items-center space-x-3">
-          <input id="skirts" type="radio">
-          <label for="skirts">skirts</label>
+        <div class="flex justify-center my-4">
+          <button class="w-full bg-orange-500 py-3 text-white font-bold rounded-md" (click)="applyFiltter()" >apply</button>
         </div>
       </div>
-      <!--      men-->
-
-      <div class="flex justify-between items-center px-2 py-4 w-48 rounded-md ml-4 mt-2 hover:bg-orange-200 ">
-        <p>men</p>
-        <button>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
-      </div>
-
-      <!--      end-->
-
     </div>
     <!--contents-->
     <div class="md:ml-4 mb-6">
