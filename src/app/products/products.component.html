@@ -64,15 +64,15 @@
     <!--contents-->
     <div class="md:ml-4 mb-6">
       <!--fillterd detaile-->
-      <div class="mb-6 ">
-        <p>Showing <span class="font-semibold">"{{allProducts.length}}"</span> results from total <span class="font-semibold">"{{allProducts.length}}"</span> </p>
+      <div class="mb-6 flex  ">
+        <p>Showing <span class="font-semibold ">"{{displayedProducts.length}}"</span> results from total <span class="font-semibold">"{{allProducts.length}}"</span> </p>
       </div>
       <!--applied fillter-->
-      <div class="mb-6 flex flex-col space-y-2 space-x-0 sm:space-y-0  sm:space-x-6  sm:flex-row sm:justify-start sm:items-center ">
-        <p *ngIf="filteredCategories.length>0">Applied Filters:</p>
+      <div class=" flex flex-row justify-start  items-center flex-wrap mb-4">
+        <p *ngIf="filteredCategories.length>0" class="mr-2 ">Applied Filters:</p>
 
-        <div *ngFor="let fillteredName of filteredCategories ">
-          <div class="shadow rounded-full border p-3  w-28 h-10 flex justify-between items-center hover:bg-orange-200 ">
+        <div *ngFor="let fillteredName of filteredCategories " >
+          <div class="shadow rounded-full border p-3 mr-1 mb-1 w-28 h-10 flex justify-between items-center hover:bg-orange-200 ">
             <p>{{fillteredName}}</p>
             <button>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -85,13 +85,13 @@
 
       </div>
       <!--products-->
-      <div *ngIf="allProducts.length === 0 ">
+      <div *ngIf="displayedProducts.length === 0 ">
           <p class="text-4xl"> sorry we dont have any product that you need </p>
       </div>
-      <div *ngIf="allProducts.length !== 0 ">
+      <div *ngIf="displayedProducts.length !== 0 ">
         <div class="flex flex-col justify-between ">
           <div  class="mb-8 flex flex-col gap-4  items-center justify-center sm:flex-row  sm:flex-wrap">
-            <div *ngFor="let currentProduct of allProducts">
+            <div *ngFor="let currentProduct of displayedProducts">
               <app-product-card [product]="currentProduct"></app-product-card>
             </div>
           </div>
@@ -101,24 +101,28 @@
             <nav>
               <ul class="flex items-center -space-x-px h-10 text-base">
                 <li>
-                  <a href="#" class="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-white bg-orange-500 border border-gray-300 rounded-l-lg hover:bg-orange-600 hover:text-gray-200">
-                    <span class="sr-only">Previous</span>
+                    <button  (click)="pageDown()"
+                      class="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-white bg-orange-500 border border-gray-300 rounded-l-lg hover:bg-orange-600 hover:text-gray-200">
+                  <span class="sr-only">Previous</span>
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
                     </svg>
-                  </a>
+                    </button>
                 </li>
-                <li>
-                  <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-white bg-orange-500 border border-gray-300 hover:bg-orange-600 hover:text-gray-200">1</a>
+                <li *ngFor="let pages of totalPages  " >
+                  <button (click)="onPageChange(pages)"
+                    class="flex items-center justify-center px-4 h-10 leading-tight text-white bg-orange-500 border border-gray-300 hover:bg-orange-600 hover:text-gray-200"
+                  >{{pages}}</button>
                 </li>
-              
+
                 <li>
-                  <a href="#" class="flex items-center justify-center px-4 h-10  text-white bg-orange-500 border  rounded-r-lg hover:bg-orange-600 ">
+                  <button  (click)="pageUp()"
+                           class="flex items-center justify-center px-4 h-10  text-white bg-orange-500 border  rounded-r-lg hover:bg-orange-600 ">
                     <span class="sr-only">Next</span>
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                     </svg>
-                  </a>
+                  </button>
                 </li>
               </ul>
             </nav>

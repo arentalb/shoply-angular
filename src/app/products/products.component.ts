@@ -27,6 +27,10 @@ export class ProductsComponent implements OnInit{
 
   filteredCategories : string[] =[] ;
 
+  itemsPerPage = 12;
+  currentPage = 1;
+  totalPages: number[] = [] ;
+  displayedProducts :Product[]=[]
 
 
   constructor(private productService :ProductService) {}
@@ -39,8 +43,45 @@ export class ProductsComponent implements OnInit{
         this.checkboxStates[category][subcategory] = false;
       });
     });
+
+    this.calculateNumberOfPages()
   }
 
+  calculateNumberOfPages(){
+    this.totalPages =[]
+    let pages :number  = Math.ceil(this.allProducts.length / this.itemsPerPage);
+
+    for (let a = 1 ; a <= pages ;a++ ){
+      this.totalPages.push(a)
+      console.log(pages)
+    }
+    this.paginate();
+  }
+  paginate() {
+    // Logic to create a new array for the current page
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedProducts = this.allProducts.slice(startIndex, endIndex);
+  }
+
+  onPageChange(pageNumber: number) {
+    this.currentPage = pageNumber;
+    this.paginate();
+  }
+  pageDown(){
+    if (this.currentPage !== 1) {
+      this.currentPage--
+      this.paginate()
+      console.log(this.totalPages.length)
+    }
+  }
+
+  pageUp(){
+    if (this.currentPage !== this.totalPages.length ){
+      this.currentPage++
+      this.paginate()
+    }
+  }
   toggleCategories(){
     this.CategoriesState = !this.CategoriesState
   }
@@ -55,6 +96,8 @@ export class ProductsComponent implements OnInit{
   applyFilter(){
     // console.log('Checkbox States:', this.checkboxStates);
     this.allProducts = this.productService.getFilteredProducts(this.checkboxStates)
+    this.displayedProducts = this.productService.getFilteredProducts(this.checkboxStates)
+    this.calculateNumberOfPages()
     this.filteredCategories = this.productService.getfilteredCategories()
   }
 }
