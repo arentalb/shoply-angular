@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import {AppRoutingModule} from "./app-routing.module";
+import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { SaleComponent } from './sale/sale.component';
@@ -24,7 +24,8 @@ import { OrderComponent } from './checkout/order/order.component';
 import { OrderDetailComponent } from './checkout/order-detail/order-detail.component';
 import { ShippingAddressComponent } from './checkout/order-detail/shipping-address/shipping-address.component';
 import { OrderCardComponent } from './checkout/order/order-card/order-card.component';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from '@angular/forms';
+import { ProductCardSaleComponent } from './product-card-sale/product-card-sale.component';
 
 @NgModule({
   declarations: [
@@ -50,13 +51,10 @@ import {FormsModule} from "@angular/forms";
     OrderDetailComponent,
     ShippingAddressComponent,
     OrderCardComponent,
+    ProductCardSaleComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

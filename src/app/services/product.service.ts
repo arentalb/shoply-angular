@@ -1,32 +1,41 @@
 import { Injectable } from '@angular/core';
-import {ProductsDataService} from "./products-data.service";
-import {CheckboxStates} from "../models/checkbox-states";
-import {Product} from "../models/product";
-
+import { ProductsDataService } from './products-data.service';
+import { CheckboxStates } from '../models/checkbox-states';
+import { Product } from '../models/product';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
+  constructor(private productDataService: ProductsDataService) {}
 
+  private filteredCategories: string[] = [];
+  private filteredCategoriesForSale: string[] = [];
 
-  constructor(private productDataService :ProductsDataService) {
-
+  getfilteredCategories() {
+    return this.filteredCategories;
   }
 
-  getAllProducts(){
-    return this.productDataService.productsInStock
+  getfilteredCategoriesforsale() {
+    return this.filteredCategoriesForSale;
   }
 
-  private filteredCategories : string[] =[];
+  getAllProducts() {
+    return this.productDataService.productsInStock;
+  }
 
-  getFilteredProducts(checkboxStates :CheckboxStates){
+  getAllProductsForSale() {
+    return this.productDataService.productsInStock.slice(0, 5);
+  }
 
-    const anyCheckboxSelected = Object.keys(checkboxStates).some(category =>
-      Object.values(checkboxStates[category]).some(subcategory => subcategory)
+  getFilteredProducts(checkboxStates: CheckboxStates) {
+    const anyCheckboxSelected = Object.keys(checkboxStates).some((category) =>
+      Object.values(checkboxStates[category]).some(
+        (subcategory) => subcategory,
+      ),
     );
 
-    this.filteredCategories =[]
+    this.filteredCategories = [];
     for (const arrayKey in checkboxStates) {
       if (checkboxStates.hasOwnProperty(arrayKey)) {
         const array = checkboxStates[arrayKey];
@@ -34,37 +43,76 @@ export class ProductService {
         for (const itemKey in array) {
           if (array.hasOwnProperty(itemKey)) {
             const value = array[itemKey];
-            if (value === true ){
-              this.filteredCategories.push(itemKey)
+            if (value === true) {
+              this.filteredCategories.push(itemKey);
               // console.log(itemKey)
               if (this.filteredCategories.includes(arrayKey)) {
-                this.filteredCategories.push(arrayKey)
+                this.filteredCategories.push(arrayKey);
                 // console.log(arrayKey)
               }
             }
             // console.log(`${arrayKey}.  ${itemKey}: ${value}`);
-
           }
         }
-
       }
     }
 
     if (anyCheckboxSelected) {
-    return this.productDataService.productsInStock.filter((product: Product) => {
-      const category = product.category.toString();
-      const subcategory = product.subcategory.toString();
+      return this.productDataService.productsInStock.filter(
+        (product: Product) => {
+          const category = product.category.toString();
+          const subcategory = product.subcategory.toString();
 
-
-      return checkboxStates[category] && checkboxStates[category][subcategory];
-    });
+          return (
+            checkboxStates[category] && checkboxStates[category][subcategory]
+          );
+        },
+      );
     } else {
       return this.productDataService.productsInStock;
     }
   }
 
-  getfilteredCategories(){
-    return this.filteredCategories
-  }
+  getFilteredProductsforSale(checkboxStates: CheckboxStates) {
+    const anyCheckboxSelected = Object.keys(checkboxStates).some((category) =>
+      Object.values(checkboxStates[category]).some(
+        (subcategory) => subcategory,
+      ),
+    );
 
+    this.filteredCategoriesForSale = [];
+    for (const arrayKey in checkboxStates) {
+      if (checkboxStates.hasOwnProperty(arrayKey)) {
+        const array = checkboxStates[arrayKey];
+
+        for (const itemKey in array) {
+          if (array.hasOwnProperty(itemKey)) {
+            const value = array[itemKey];
+            if (value === true) {
+              this.filteredCategoriesForSale.push(itemKey);
+              // console.log(itemKey)
+              if (this.filteredCategoriesForSale.includes(arrayKey)) {
+                this.filteredCategoriesForSale.push(arrayKey);
+                // console.log(arrayKey)
+              }
+            }
+            // console.log(`${arrayKey}.  ${itemKey}: ${value}`);
+          }
+        }
+      }
+    }
+
+    if (anyCheckboxSelected) {
+      return this.getAllProductsForSale().filter((product: Product) => {
+        const category = product.category.toString();
+        const subcategory = product.subcategory.toString();
+
+        return (
+          checkboxStates[category] && checkboxStates[category][subcategory]
+        );
+      });
+    } else {
+      return this.getAllProductsForSale();
+    }
+  }
 }
