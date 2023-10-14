@@ -24,6 +24,7 @@ import { OrderComponent } from './checkout/order/order.component';
 import { OrderDetailComponent } from './checkout/order-detail/order-detail.component';
 import { ShippingAddressComponent } from './checkout/order-detail/shipping-address/shipping-address.component';
 import { OrderCardComponent } from './checkout/order/order-card/order-card.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { OrderCardComponent } from './checkout/order/order-card/order-card.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

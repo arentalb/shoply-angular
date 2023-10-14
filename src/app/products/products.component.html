@@ -22,10 +22,10 @@
     <!--main-->
   <div class="sm:flex ">
     <!--fillter drop down -->
-    <div class="shadow border rounded-md shadow-gray-50 p-2 w-[300px] sm:w-[400px] md:w-[600px] mb-8 h-fit">
+    <div class="shadow border rounded-md shadow-gray-50 p-2 max-w-[300px] sm:max-w-[400px] md:max-w-[600px] mb-8 h-fit">
 
 <!--      category-->
-      <div class="flex justify-between items-center  py-4 px-6 rounded-md hover:bg-orange-200 ">
+      <div class="flex justify-between items-center w-full sm:w-[200px] md:w-[200px] py-4 px-6 rounded-md hover:bg-orange-200 ">
         <p class="font-bold">categories</p>
        <button (click)="toggleCategories()">
          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -46,16 +46,18 @@
             </button>
           </div>
          <div *ngIf="isCategoryOpen(i)">
-           <div *ngFor="let subCat of subcategories" class="flex  flex-col items-start py-1 px-6  rounded-md ml-8 mt-2 ">
+           <div *ngFor="let subCat of subcategories ; let j = index" class="flex  flex-col items-start py-1 px-6  rounded-md ml-8 mt-2 ">
              <div class="flex justify-between items-center space-x-3">
-               <input id="shirts" type="radio">
-               <label for="shirts">{{subCat}}</label>
+               <input id="{{ 'checkbox-' + cate + '-' + j }}" type="checkbox"
+                      [(ngModel)]="checkboxStates[cate][subCat]">
+               <label for="{{ 'checkbox-' + cate + '-' + j }}">{{ subCat.toString() }}</label>
+
              </div>
            </div>
          </div>
         </div>
         <div class="flex justify-center my-4">
-          <button class="w-full bg-orange-500 py-3 text-white font-bold rounded-md" (click)="applyFiltter()" >apply</button>
+          <button class="w-full bg-orange-500 py-3 text-white font-bold rounded-md hover:bg-orange-600" (click)="applyFilter()" >apply</button>
         </div>
       </div>
     </div>
@@ -63,78 +65,66 @@
     <div class="md:ml-4 mb-6">
       <!--fillterd detaile-->
       <div class="mb-6 ">
-        <p>Showing <span class="font-semibold">"9"</span> results from total <span class="font-semibold">"50"</span> for “shirts”</p>
+        <p>Showing <span class="font-semibold">"{{allProducts.length}}"</span> results from total <span class="font-semibold">"{{allProducts.length}}"</span> </p>
       </div>
       <!--applied fillter-->
       <div class="mb-6 flex flex-col space-y-2 space-x-0 sm:space-y-0  sm:space-x-6  sm:flex-row sm:justify-start sm:items-center ">
-        <p>Applied Filters:</p>
-        <div class="shadow rounded-full border p-3  w-28 h-10 flex justify-between items-center hover:bg-orange-200 ">
-          <p>Men</p>
-          <button>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+        <p *ngIf="filteredCategories.length>0">Applied Filters:</p>
+
+        <div *ngFor="let fillteredName of filteredCategories ">
+          <div class="shadow rounded-full border p-3  w-28 h-10 flex justify-between items-center hover:bg-orange-200 ">
+            <p>{{fillteredName}}</p>
+            <button>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
-        <div class="shadow rounded-full border p-3  w-28 h-10 flex justify-between items-center hover:bg-orange-200 ">
-          <p>T-shirts</p>
-          <button>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
+
 
       </div>
       <!--products-->
-      <div class="flex flex-col justify-between ">
-           <div class="mb-8 flex flex-col gap-4  items-center justify-center sm:flex-row  sm:flex-wrap">
-             <app-product-card></app-product-card>
-             <app-product-card></app-product-card>
-             <app-product-card></app-product-card>
-             <app-product-card></app-product-card>
-             <app-product-card></app-product-card>
-           </div>
-        <!--tabs-->
-        <div class="flex justify-center items-center">
+      <div *ngIf="allProducts.length === 0 ">
+          <p class="text-4xl"> sorry we dont have any product that you need </p>
+      </div>
+      <div *ngIf="allProducts.length !== 0 ">
+        <div class="flex flex-col justify-between ">
+          <div  class="mb-8 flex flex-col gap-4  items-center justify-center sm:flex-row  sm:flex-wrap">
+            <div *ngFor="let currentProduct of allProducts">
+              <app-product-card [product]="currentProduct"></app-product-card>
+            </div>
+          </div>
+          <!--tabs-->
+          <div class="flex justify-center items-center">
 
-          <nav>
-            <ul class="flex items-center -space-x-px h-10 text-base">
-              <li>
-                <a href="#" class="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-white bg-orange-500 border border-gray-300 rounded-l-lg hover:bg-orange-600 hover:text-gray-200">
-                  <span class="sr-only">Previous</span>
-                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-white bg-orange-500 border border-gray-300 hover:bg-orange-600 hover:text-gray-200">1</a>
-              </li>
-              <li>
-                <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-white bg-orange-500 border border-gray-300 hover:bg-orange-600 hover:text-gray-200">2</a>
-              </li>
-              <li>
-                <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-4 h-10 leading-tight text-white border border-blue-300 bg-orange-500 hover:bg-orange-600 hover:text-gray-200">3</a>
-              </li>
-              <li>
-                <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-white bg-orange-500 border border-gray-300 hover:bg-orange-600 hover:text-gray-200">4</a>
-              </li>
-              <li>
-                <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-white bg-orange-500 border border-gray-300 hover:bg-orange-600 hover:text-gray-200">5</a>
-              </li>
-              <li>
-                <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-white bg-orange-500 border border-gray-300 rounded-r-lg hover:bg-orange-600 hover:text-gray-200">
-                  <span class="sr-only">Next</span>
-                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                  </svg>
-                </a>
-              </li>
-            </ul>
-          </nav>
+            <nav>
+              <ul class="flex items-center -space-x-px h-10 text-base">
+                <li>
+                  <a href="#" class="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-white bg-orange-500 border border-gray-300 rounded-l-lg hover:bg-orange-600 hover:text-gray-200">
+                    <span class="sr-only">Previous</span>
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-white bg-orange-500 border border-gray-300 hover:bg-orange-600 hover:text-gray-200">1</a>
+                </li>
+              
+                <li>
+                  <a href="#" class="flex items-center justify-center px-4 h-10  text-white bg-orange-500 border  rounded-r-lg hover:bg-orange-600 ">
+                    <span class="sr-only">Next</span>
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </nav>
 
 
+          </div>
         </div>
       </div>
     </div>

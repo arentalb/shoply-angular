@@ -1,56 +1,32 @@
 <div class=" p-6 shadow border rounded-xl  bg-white w-72">
   <!--  image-->
-  <div class="h-64 sm:h-52">
-    <img class="object-cover w-full h-full  " src="assets/images/teshirty.png" alt="">
+  <div class="h-64 sm:h-52 ">
+    <img class="object-cover w-full h-full  rounded-lg" [src]="product.imgURl" alt="">
   </div>
   <!--  detail-->
   <div>
     <!--  product name -->
     <div>
-      <p class="font-bold  text-lg">my product name </p>
+      <p class="font-bold  text-lg">{{product.name}}</p>
     </div>
     <!--  product price -->
     <div>
-      <p class="text-sm">$ 20.00 </p>
+      <p class="text-sm">$ {{product.price}} </p>
     </div>
     <!--  product sizes-->
     <div class="flex space-x-3 my-4">
-      <!--      small size-->
-      <div >
-        <label for="s" class="inline-flex items-center ">
-          <input type="radio" id="s" name="options" class="hidden" />
-          <div class="border border-orange-500 text-orange-500  py-0 px-2 rounded active:bg-orange-500 active:text-white">
-            S
-          </div>
-        </label>
-      </div>
-      <!--      midume size-->
-      <div>
-        <label for="m" class="inline-flex items-center ">
-          <input type="radio" id="m" name="options" class="hidden" />
-          <div class="border border-orange-500 text-orange-500  py-0 px-2 rounded active:bg-orange-500 active:text-white">
-            M
-          </div>
-        </label>
-      </div>
-      <!--      large size-->
-      <div>
-        <label for="l" class="inline-flex items-center ">
-          <input type="radio" id="l" name="options" class="hidden" />
-          <div class="border border-orange-500 text-orange-500  py-0 px-2 rounded active:bg-orange-500 active:text-white">
-            L
-          </div>
-        </label>
-      </div>
-      <!--      xlarge size-->
-      <div>
-        <label for="xl" class="inline-flex items-center ">
-          <input type="radio" id="xl" name="options" class="hidden"  />
-          <div class="border border-orange-500 text-orange-500  py-0 px-2 rounded active:bg-orange-500 active:text-white">
-            XL
-          </div>
-        </label>
-      </div>
+      <!-- sizes-->
+     <div *ngFor="let sizes of product.sizes">
+       <div >
+         <label for="s" class="inline-flex items-center ">
+           <input type="radio" id="s" name="options" class="hidden" />
+           <div class="border border-orange-500 text-orange-500  py-0 px-2 rounded active:bg-orange-500 active:text-white">
+             {{sizes}}
+           </div>
+         </label>
+       </div>
+     </div>
+
 
     </div>
 
