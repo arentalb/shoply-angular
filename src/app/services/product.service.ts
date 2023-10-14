@@ -36,10 +36,10 @@ export class ProductService {
             const value = array[itemKey];
             if (value === true ){
               this.filteredCategories.push(itemKey)
-              console.log(itemKey)
+              // console.log(itemKey)
               if (this.filteredCategories.includes(arrayKey)) {
                 this.filteredCategories.push(arrayKey)
-                console.log(arrayKey)
+                // console.log(arrayKey)
               }
             }
             // console.log(`${arrayKey}.  ${itemKey}: ${value}`);

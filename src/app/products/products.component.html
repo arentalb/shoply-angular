@@ -71,10 +71,10 @@
       <div class=" flex flex-row justify-start  items-center flex-wrap mb-4">
         <p *ngIf="filteredCategories.length>0" class="mr-2 ">Applied Filters:</p>
 
-        <div *ngFor="let fillteredName of filteredCategories " >
+        <div *ngFor="let filteredName of filteredCategories " >
           <div class="shadow rounded-full border p-3 mr-1 mb-1 w-28 h-10 flex justify-between items-center hover:bg-orange-200 ">
-            <p>{{fillteredName}}</p>
-            <button>
+            <p>{{filteredName}}</p>
+            <button (click)="onRemoveFilter(filteredName)">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
