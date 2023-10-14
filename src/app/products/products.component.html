@@ -1,7 +1,7 @@
 <div class="p-5 mb-4">
-    <!--breadcrumb -->
+  <!--breadcrumb -->
   <div class="pb-4 md:pb-8">
-    <nav class="flex" >
+    <nav class="flex">
       <ol class="flex items-center justify-center ">
         <li class="mr-2">
           <a [routerLink]="['/']" class="text-gray-600 font-bold">
@@ -10,54 +10,63 @@
         </li>
         <li>
           <div class="flex justify-center items-center  ">
-            <svg class="w-4  h-4 mt-1 text-gray-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            <svg class="w-4  h-4 mt-1 text-gray-400 mr-2" fill="none" stroke="currentColor"
+                 stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.25 4.5l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <a [routerLink]="['/products']" class=" text-gray-400 font-semibold mr-2">product</a>
+            <a [routerLink]="['/products']" class=" text-gray-400 font-semibold mr-2">
+              product
+            </a>
           </div>
         </li>
       </ol>
     </nav>
   </div>
-    <!--main-->
+  <!--main-->
   <div class="sm:flex ">
     <!--fillter drop down -->
     <div class="shadow border rounded-md shadow-gray-50 p-2 max-w-[300px] sm:max-w-[400px] md:max-w-[600px] mb-8 h-fit">
 
-<!--      category-->
-      <div class="flex justify-between items-center w-full sm:w-[200px] md:w-[200px] py-4 px-6 rounded-md hover:bg-orange-200 ">
+      <!--      category-->
+      <div
+        class="flex justify-between items-center w-full sm:w-[200px] md:w-[200px] py-4 px-6 rounded-md hover:bg-orange-200 ">
         <p class="font-bold">categories</p>
-       <button (click)="toggleCategories()">
-         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-           <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-         </svg>
-       </button>
+        <button (click)="toggleCategories()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
 
       <div *ngIf="CategoriesState">
         <div *ngFor="let cate of categories ;let i = index">
-          <div  class="flex  justify-between items-center py-4 px-6 rounded-md ml-4 mt-2 hover:bg-orange-200">
+          <div class="flex  justify-between items-center py-4 px-6 rounded-md ml-4 mt-2 hover:bg-orange-200">
 
             <p class="font-semibold">{{cate.toString()}}</p>
             <button (click)="toggleCategory(i)">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                   viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
           </div>
-         <div *ngIf="isCategoryOpen(i)">
-           <div *ngFor="let subCat of subcategories ; let j = index" class="flex  flex-col items-start py-1 px-6  rounded-md ml-8 mt-2 ">
-             <div class="flex justify-between items-center space-x-3">
-               <input id="{{ 'checkbox-' + cate + '-' + j }}" type="checkbox"
-                      [(ngModel)]="checkboxStates[cate][subCat]">
-               <label for="{{ 'checkbox-' + cate + '-' + j }}">{{ subCat.toString() }}</label>
+          <div *ngIf="isCategoryOpen(i)">
+            <div *ngFor="let subCat of subcategories ; let j = index"
+                 class="flex  flex-col items-start py-1 px-6  rounded-md ml-8 mt-2 ">
+              <div class="flex justify-between items-center space-x-3">
+                <input [(ngModel)]="checkboxStates[cate][subCat]" id="{{ 'checkbox-' + cate + '-' + j }}"
+                       type="checkbox">
+                <label for="{{ 'checkbox-' + cate + '-' + j }}">{{ subCat.toString() }}</label>
 
-             </div>
-           </div>
-         </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="flex justify-center my-4">
-          <button class="w-full bg-orange-500 py-3 text-white font-bold rounded-md hover:bg-orange-600" (click)="applyFilter()" >apply</button>
+          <button (click)="applyFilter()"
+                  class="w-full bg-orange-500 py-3 text-white font-bold rounded-md hover:bg-orange-600">apply
+          </button>
         </div>
       </div>
     </div>
@@ -65,18 +74,21 @@
     <div class="md:ml-4 mb-6">
       <!--fillterd detaile-->
       <div class="mb-6 flex  ">
-        <p>Showing <span class="font-semibold ">"{{displayedProducts.length}}"</span> results from total <span class="font-semibold">"{{allProducts.length}}"</span> </p>
+        <p>Showing <span class="font-semibold ">"{{displayedProducts.length}}"</span> results from total <span
+          class="font-semibold">"{{allProducts.length}}"</span></p>
       </div>
       <!--applied fillter-->
       <div class=" flex flex-row justify-start  items-center flex-wrap mb-4">
         <p *ngIf="filteredCategories.length>0" class="mr-2 ">Applied Filters:</p>
 
-        <div *ngFor="let filteredName of filteredCategories " >
-          <div class="shadow rounded-full border p-3 mr-1 mb-1 w-28 h-10 flex justify-between items-center hover:bg-orange-200 ">
+        <div *ngFor="let filteredName of filteredCategories ">
+          <div
+            class="shadow rounded-full border p-3 mr-1 mb-1 w-28 h-10 flex justify-between items-center hover:bg-orange-200 ">
             <p>{{filteredName}}</p>
             <button (click)="onRemoveFilter(filteredName)">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                   viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
           </div>
@@ -86,11 +98,11 @@
       </div>
       <!--products-->
       <div *ngIf="displayedProducts.length === 0 ">
-          <p class="text-4xl"> sorry we dont have any product that you need </p>
+        <p class="text-4xl"> sorry we dont have any product that you need </p>
       </div>
       <div *ngIf="displayedProducts.length !== 0 ">
         <div class="flex flex-col justify-between ">
-          <div  class="mb-8 flex flex-col gap-4  items-center justify-center sm:flex-row  sm:flex-wrap">
+          <div class="mb-8 flex flex-col gap-4  items-center justify-center sm:flex-row  sm:flex-wrap">
             <div *ngFor="let currentProduct of displayedProducts">
               <app-product-card [product]="currentProduct"></app-product-card>
             </div>
@@ -101,26 +113,30 @@
             <nav>
               <ul class="flex items-center -space-x-px h-10 text-base">
                 <li>
-                    <button  (click)="pageDown()"
-                      class="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-white bg-orange-500 border border-gray-300 rounded-l-lg hover:bg-orange-600 hover:text-gray-200">
-                  <span class="sr-only">Previous</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                  <button (click)="pageDown()"
+                          class="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-white bg-orange-500 border border-gray-300 rounded-l-lg hover:bg-orange-600 hover:text-gray-200">
+                    <span class="sr-only">Previous</span>
+                    <svg aria-hidden="true" class="w-3 h-3" fill="none" viewBox="0 0 6 10"
+                         xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 1 1 5l4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"/>
                     </svg>
-                    </button>
+                  </button>
                 </li>
-                <li *ngFor="let pages of totalPages  " >
+                <li *ngFor="let pages of totalPages  ">
                   <button (click)="onPageChange(pages)"
-                    class="flex items-center justify-center px-4 h-10 leading-tight text-white bg-orange-500 border border-gray-300 hover:bg-orange-600 hover:text-gray-200"
+                          class="flex items-center justify-center px-4 h-10 leading-tight text-white bg-orange-500 border border-gray-300 hover:bg-orange-600 hover:text-gray-200"
                   >{{pages}}</button>
                 </li>
 
                 <li>
-                  <button  (click)="pageUp()"
-                           class="flex items-center justify-center px-4 h-10  text-white bg-orange-500 border  rounded-r-lg hover:bg-orange-600 ">
+                  <button (click)="pageUp()"
+                          class="flex items-center justify-center px-4 h-10  text-white bg-orange-500 border  rounded-r-lg hover:bg-orange-600 ">
                     <span class="sr-only">Next</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                    <svg aria-hidden="true" class="w-3 h-3" fill="none" viewBox="0 0 6 10"
+                         xmlns="http://www.w3.org/2000/svg">
+                      <path d="m1 9 4-4-4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"/>
                     </svg>
                   </button>
                 </li>
