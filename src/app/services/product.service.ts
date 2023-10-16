@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
-import { ProductsDataService } from './products-data.service';
-import { CheckboxStates } from '../models/checkbox-states';
-import { Product } from '../models/product';
+import {Injectable} from '@angular/core';
+import {ProductsDataService} from './products-data.service';
+import {CheckboxStates} from '../models/checkbox-states';
+import {Product} from '../models/product';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private productDataService: ProductsDataService) {}
+  constructor(private productDataService: ProductsDataService) {
+  }
 
-  private filteredCategories: string[] = [];
+  private filteredCategories: { category: string, subCategory: string }[] = [];
+
   private filteredCategoriesForSale: string[] = [];
 
   getfilteredCategories() {
@@ -44,14 +46,19 @@ export class ProductService {
           if (array.hasOwnProperty(itemKey)) {
             const value = array[itemKey];
             if (value === true) {
-              this.filteredCategories.push(itemKey);
-              // console.log(itemKey)
-              if (this.filteredCategories.includes(arrayKey)) {
-                this.filteredCategories.push(arrayKey);
-                // console.log(arrayKey)
-              }
+              let obj: { category: string, subCategory: string }
+                = {category: arrayKey, subCategory: itemKey}
+              this.filteredCategories.push(obj);
+
+              console.log("item key ")
+              console.log(itemKey)
+              // if (this.filteredCategories.includes(arrayKey)) {
+              //   this.filteredCategories.push(arrayKey);
+              //   console.log("array Key ")
+              //   console.log(arrayKey)
+              // }
+              console.log(`${arrayKey}.  ${itemKey}: ${value}`);
             }
-            // console.log(`${arrayKey}.  ${itemKey}: ${value}`);
           }
         }
       }

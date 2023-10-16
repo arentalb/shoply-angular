@@ -39,7 +39,7 @@
         </button>
       </div>
 
-      <div *ngIf="CategoriesState">
+      <div *ngIf="mainDropDownState">
         <div *ngFor="let cate of categories ;let i = index">
           <div class="flex  justify-between items-center py-4 px-6 rounded-md ml-4 mt-2 hover:bg-orange-200">
 
@@ -55,9 +55,9 @@
             <div *ngFor="let subCat of subcategories ; let j = index"
                  class="flex  flex-col items-start py-1 px-6  rounded-md ml-8 mt-2 ">
               <div class="flex justify-between items-center space-x-3">
-                <input [(ngModel)]="checkboxStates[cate][subCat]" id="{{ 'checkbox-' + cate + '-' + j }}"
+                <input [(ngModel)]="checkboxStates[cate][subCat]" id="{{ 'checkbox-' + cate + '-' + subCat }}"
                        type="checkbox">
-                <label for="{{ 'checkbox-' + cate + '-' + j }}">{{ subCat.toString() }}</label>
+                <label for="{{ 'checkbox-' + cate + '-' + subCat }}">{{ subCat.toString() }}</label>
 
               </div>
             </div>
@@ -84,8 +84,8 @@
         <div *ngFor="let filteredName of filteredCategories ">
           <div
             class="shadow rounded-full border p-3 mr-1 mb-1 w-28 h-10 flex justify-between items-center hover:bg-orange-200 ">
-            <p>{{filteredName}}</p>
-            <button (click)="onRemoveFilter(filteredName )">
+            <p>{{filteredName.subCategory}}</p>
+            <button (click)="onRemoveFilter(filteredName.category , filteredName.subCategory )">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>

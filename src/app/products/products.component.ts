@@ -11,30 +11,15 @@ import {CheckboxStates} from "../models/checkbox-states";
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+
+  constructor(private productService: ProductService) {
+  }
+
   categories: Category[] = [Category.Men, Category.Women];
   subcategories: Subcategory[] =
     [Subcategory.Tshirt, Subcategory.Jeans,
       Subcategory.Shorts, Subcategory.Dresses,
       Subcategory.Jackets, Subcategory.Shoes];
-
-
-  CategoriesState = false
-  categoryStates: boolean[] = [];
-
-  allProducts: Product[]
-
-  checkboxStates: CheckboxStates = {};
-
-  filteredCategories: string[] = [];
-
-  itemsPerPage = 12;
-  currentPage = 1;
-  totalPages: number[] = [];
-  displayedProducts: Product[] = []
-
-
-  constructor(private productService: ProductService) {
-  }
 
   ngOnInit() {
     this.allProducts = this.productService.getAllProducts()
@@ -47,6 +32,57 @@ export class ProductsComponent implements OnInit {
 
     this.calculateNumberOfPages()
   }
+
+
+  mainDropDownState = false
+
+  toggleCategories() {
+    this.mainDropDownState = !this.mainDropDownState
+  }
+
+  categoryStates: boolean[] = [];
+
+  toggleCategory(index: number): void {
+    this.categoryStates[index] = !this.categoryStates[index];
+  }
+
+  isCategoryOpen(index: number): boolean {
+    return this.categoryStates[index];
+  }
+
+
+  checkboxStates: CheckboxStates = {};
+  filteredCategories: { category: string, subCategory: string }[] = [];
+
+  applyFilter() {
+    this.allProducts = this.productService.getFilteredProducts(this.checkboxStates)
+    this.displayedProducts = this.productService.getFilteredProducts(this.checkboxStates)
+    this.calculateNumberOfPages()
+    this.filteredCategories = this.productService.getfilteredCategories()
+    console.log(this.checkboxStates)
+  }
+
+  onRemoveFilter(category, subCategory) {
+
+
+    // uncheck the checkbox
+    if (this.checkboxStates[category] && this.checkboxStates[category][subCategory] !== undefined) {
+      this.checkboxStates[category][subCategory] = false;
+
+      this.checkboxStates = {...this.checkboxStates};
+
+      this.applyFilter();
+    } else {
+      console.error(`Invalid category or subcategory: ${category}, ${subCategory}`);
+    }
+
+  }
+
+  allProducts: Product[]
+  itemsPerPage = 12;
+  currentPage = 1;
+  totalPages: number[] = [];
+  displayedProducts: Product[] = []
 
   calculateNumberOfPages() {
     this.totalPages = []
@@ -83,36 +119,6 @@ export class ProductsComponent implements OnInit {
     if (this.currentPage !== this.totalPages.length) {
       this.currentPage++
       this.paginate()
-    }
-  }
-
-  toggleCategories() {
-    this.CategoriesState = !this.CategoriesState
-  }
-
-  toggleCategory(index: number): void {
-    this.categoryStates[index] = !this.categoryStates[index];
-  }
-
-  isCategoryOpen(index: number): boolean {
-    return this.categoryStates[index];
-  }
-
-  applyFilter() {
-    // console.log('Checkbox States:', this.checkboxStates);
-    this.allProducts = this.productService.getFilteredProducts(this.checkboxStates)
-    this.displayedProducts = this.productService.getFilteredProducts(this.checkboxStates)
-    this.calculateNumberOfPages()
-    this.filteredCategories = this.productService.getfilteredCategories()
-  }
-
-  onRemoveFilter(filterName: string) {
-    const category = Object.keys(this.checkboxStates).find(cat => this.checkboxStates[cat][filterName] !== undefined);
-    if (category && this.checkboxStates[category] && this.checkboxStates[category][filterName] !== undefined) {
-      this.checkboxStates[category][filterName] = false;
-      this.applyFilter()
-    } else {
-      console.error(`Invalid filterName: ${filterName}`);
     }
   }
 }
