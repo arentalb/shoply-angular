@@ -1,12 +1,61 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../models/product";
+import {CartService} from "../services/cart.service";
+import {Size} from "../enums/size";
+import {CartItem} from "../models/cart-item";
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css']
 })
-export class ProductCardComponent {
+export class ProductCardComponent implements OnInit {
 
-  @Input() product :Product
+  constructor(private cartService: CartService) {
+  }
+
+  @Input() product: Product
+
+  psc: number = 1;
+  showModal = false;
+  defaultSize: string = ""
+
+  ngOnInit() {
+    this.defaultSize = this.product.sizes[0]
+  }
+
+
+  selectSize(size) {
+    this.defaultSize = size
+
+  }
+
+  show(product: Product) {
+    this.showModal = true;
+
+  }
+
+  hide() {
+    this.showModal = false;
+  }
+
+  addAndHide() {
+    this.showModal = false;
+
+    let pro: CartItem = {product: this.product, quantity: this.psc, selectedSize: this.defaultSize}
+    this.cartService.addProduct(pro)
+  }
+
+  dec() {
+    if (this.psc > 1) {
+      this.psc--
+    }
+  }
+
+  inc() {
+    if (this.psc < 5) {
+      this.psc++
+    }
+  }
+
 }
