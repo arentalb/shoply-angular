@@ -1,5 +1,4 @@
-import {Injectable} from '@angular/core';
-import {Product} from "../models/product";
+import {EventEmitter, Injectable} from '@angular/core';
 import {CartItem} from "../models/cart-item";
 
 @Injectable({
@@ -14,7 +13,8 @@ export class CartService {
 
   addProduct(newProduct: CartItem) {
     this.productsInCart.push(newProduct)
-    console.log(this.productsInCart)
   }
+
+
 }
 

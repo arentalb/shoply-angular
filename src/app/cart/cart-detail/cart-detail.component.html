@@ -21,10 +21,8 @@
         </div>
         <p class="pl-4">select all</p>
       </div>
-      <div class="mt-10">
-        <app-cart-card></app-cart-card>
-        <app-cart-card></app-cart-card>
-
+      <div class="mt-10" *ngFor="let cartProduct of allProductsInTheCart">
+        <app-cart-card [cartProduct]="cartProduct"></app-cart-card>
       </div>
     </div>
   </div>
