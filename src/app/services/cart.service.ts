@@ -13,6 +13,8 @@ export class CartService {
 
   addProduct(newProduct: CartItem) {
     this.productsInCart.push(newProduct)
+    this.calculateTotal()
+
   }
 
   deleteCartItem(cartItem: CartItem) {
@@ -20,6 +22,8 @@ export class CartService {
 
     if (index !== -1) {
       this.productsInCart.splice(index, 1);
+      this.calculateTotal()
+
     }
   }
 
@@ -29,6 +33,8 @@ export class CartService {
 
     if (foundItem && foundItem.quantity > 1) {
       foundItem.quantity--;
+      this.calculateTotal()
+
     }
   }
 
@@ -37,7 +43,21 @@ export class CartService {
 
     if (foundItem && foundItem.quantity < 5) {
       foundItem.quantity++;
+      this.calculateTotal()
     }
+  }
+
+  totalCostEvent: EventEmitter<number> = new EventEmitter<number>();
+
+  totalCost = 0
+
+  calculateTotal() {
+    this.totalCost = 0
+    this.productsInCart.forEach((cartItem: CartItem) => {
+      const itemTotal = cartItem.quantity * cartItem.product.price;
+      this.totalCost += itemTotal;
+    });
+    this.totalCostEvent.next(this.totalCost)
   }
 }
 

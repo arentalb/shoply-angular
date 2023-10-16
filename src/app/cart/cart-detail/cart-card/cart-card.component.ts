@@ -21,15 +21,19 @@ export class CartCardComponent implements OnInit {
 
   deleteProduct(cartItem: CartItem) {
     this.cartService.deleteCartItem(cartItem)
+    this.cartService.calculateTotal()
   }
+
 
   decQuantity(cartItem: CartItem) {
     this.cartService.decQuantity(cartItem)
+    this.cartService.calculateTotal()
 
   }
 
   incQuantity(cartItem: CartItem) {
     this.cartService.incQuantity(cartItem)
+    this.cartService.calculateTotal()
 
   }
 
