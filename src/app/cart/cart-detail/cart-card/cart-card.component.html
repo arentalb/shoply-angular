@@ -1,27 +1,60 @@
-<div class="border-t-gray-400 border-t">
-  <div class="flex sm:flex-row">
+<div class="border-t-gray-400 border-t ">
+  <div class="flex sm:flex-row p-2">
 
     <!--  checkbox-->
-    <div class="flex items-center justify-center">
+    <div class="flex items-center justify-center mr-2">
       <div class="w-6 h-6 flex flex-col justify-center items-center ">
-        <input class="hidden" id="myCheckbox" type="checkbox">
-        <label class="w-5 h-5 bg-white rounded-md border border-black" for="myCheckbox"></label>
+        <input class="hidden"
+               [id]="'cartItem-' + cardItem + '-' + cardItem.product.id"
+               [name]="'cartItem-' + cardItem.product.id"
+               [checked]="CheckedOrNot"
+               [(ngModel)]="CheckedOrNot"
+               type="checkbox">
+        <label
+          (click)="toggleCheck()"
+          [ngClass]="{'bg-orange-500 border-0': CheckedOrNot}"
+          class="w-5 h-5 bg-orange-500 rounded-md border  border-gray-400  flex items-center justify-center text-white"
+          [for]="'cartItem' + cardItem + '-' + cardItem.product.id">
+          <svg [hidden]="CheckedOrNot"
+
+               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+          </svg>
+
+        </label>
       </div>
+
     </div>
     <!--  image-->
-    <div class="flex items-center justify-center ">
-      <img alt="" class="h-24 sm:ml-8 sm:h-44" [src]="cartProduct.product.imgURl">
+    <div class="sm:flex items-center justify-center hidden">
+      <div class="  sm:h-32 sm:w-32  ">
+        <img alt=""
+             class="object-cover w-full h-full  rounded-lg "
+             [src]="cardItem.product.imgURl">
+      </div>
     </div>
     <!--  other content -->
     <div class="p-4 sm:flex sm:justify-between w-full md:w-4/5 sm:flex-row">
       <!--  name -->
       <div class="mb-2">
-        <p class="text-lg font-bold">{{cartProduct.product.name}}</p>
-        <p class="text-gray-400">{{cartProduct.selectedSize}}</p>
+        <p class="text-lg font-bold">{{cardItem.product.name}}</p>
+        <p class="text-gray-400">{{cardItem.selectedSize}}</p>
       </div>
       <!--  price -->
-      <div class="mb-2 sm:flex sm:items-center sm:text-lg">
-        <p class="font-semibold">{{cartProduct.product.price}}</p>
+      <div class="flex flex-row space-x-8 sm:space-x-12">
+        <div class="mb-2 sm:flex sm:items-center sm:text-lg">
+          <div class="flex flex-col justify-center items-center">
+            <p>price</p>
+            <p class="font-semibold">{{cardItem.product.price}}</p>
+          </div>
+        </div>
+        <div class="mb-2 sm:flex sm:items-center sm:text-lg">
+          <div class="flex flex-col justify-center items-center">
+            <p>total price </p>
+            <p class="font-semibold">{{cardItem.product.price * cardItem.quantity}}</p>
+          </div>
+        </div>
       </div>
       <!-- quantity -->
       <!---->
@@ -29,14 +62,14 @@
       <div class="sm:flex sm:justify-center sm:items-center">
         <div class="flex justify-between  ">
           <div class="border border-orange-400  px-4 space-x-4 py-2 flex items-center justify-between  ">
-            <button class="text-orange-500">
+            <button (click)="decQuantity(cardItem )" class="text-orange-500">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                    stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
               </svg>
             </button>
-            <p>2</p>
-            <button class="text-orange-500">
+            <p>{{cardItem.quantity}}</p>
+            <button (click)="incQuantity(cardItem )" class="text-orange-500">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                    stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/>
@@ -44,7 +77,10 @@
             </button>
 
           </div>
-          <button class="border border-orange-400  text-orange-500 px-4  py-2 ml-2">
+          <button
+            [disabled]="!CheckedOrNot"
+            (click)="deleteProduct(cardItem)"
+            class="border border-orange-400  text-orange-500 px-4  py-2 ml-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round"
