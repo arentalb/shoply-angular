@@ -16,7 +16,12 @@ export class FavorateService {
   }
 
   addToFavorate(product: Product) {
-    this.favorateProducts.push(product)
+    const existingProductIndex =
+      this.favorateProducts.findIndex(item => item.id === product.id);
+    if (existingProductIndex === -1) {
+      this.favorateProducts.push(product);
+
+    }
   }
 
   removeFromFavorate(product: Product) {

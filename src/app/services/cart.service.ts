@@ -12,7 +12,13 @@ export class CartService {
   }
 
   addProduct(newProduct: CartItem) {
-    this.productsInCart.push(newProduct)
+    const existingProductIndex =
+      this.productsInCart.findIndex(item => item.product.id === newProduct.product.id);
+    if (existingProductIndex !== -1) {
+      this.productsInCart[existingProductIndex].quantity += newProduct.quantity;
+    } else {
+      this.productsInCart.push(newProduct);
+    }
     this.calculateTotal()
 
   }
