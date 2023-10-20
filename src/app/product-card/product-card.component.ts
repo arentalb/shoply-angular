@@ -20,9 +20,11 @@ export class ProductCardComponent implements OnInit {
   psc: number = 1;
   showModal = false;
   defaultSize: string = ""
+  isFavorate: boolean = false
 
   ngOnInit() {
     this.defaultSize = this.product.sizes[0]
+    this.isFavorate = this.checkIfInFavorate(this.product)
   }
 
 
@@ -47,10 +49,24 @@ export class ProductCardComponent implements OnInit {
     this.cartService.addProduct(pro)
   }
 
+
   addToFavorate(product: Product) {
     this.favorateservice.addToFavorate(product)
-    console.log("addes to favorate ")
-    console.log(product)
+    this.isFavorate = true
+
+  }
+
+  removeFromFavorate(product: Product) {
+    this.favorateservice.removeFromFavorate(product)
+    this.isFavorate = false
+
+  }
+
+  checkIfInFavorate(product: Product) {
+    let pro: Product[] = this.favorateservice.favorateProducts;
+
+    return pro.some((favProduct) => favProduct.id === product.id)
+
   }
 
   dec() {
