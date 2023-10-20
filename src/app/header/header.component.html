@@ -6,11 +6,19 @@
       <div [hidden]="close" class="sm:flex sm:justify-center sm:items-center sm:space-x-6 space-x-0 ">
         <ul class="sm:flex  sm:space-x-8 text-lg py-3 sm:py-0 ">
           <li class="p-2  border-2 border-orange-200 my-2 sm:border-0 sm:my-0"><a
-            [routerLink]="['products']">Product</a></li>
+            [routerLink]="['products']"
+            routerLinkActive="border-b-2 border-b-orange-500"
+            [routerLinkActiveOptions]="{exact:true}">Product</a></li>
           <li class="p-2  border-2 border-orange-200 my-2 sm:border-0 sm:my-0"><a
-            [routerLink]="['sale']">Sale</a></li>
+            [routerLink]="['sale']"
+            routerLinkActive="border-b-2 border-b-orange-500"
+            [routerLinkActiveOptions]="{exact:true}"
+          >Sale</a></li>
           <li class="p-2  border-2 border-orange-200 my-2 sm:border-0 sm:my-0"><a
-            [routerLink]="['/cart/myCart']">Cart</a>
+            [routerLink]="['/cart/myCart']"
+            routerLinkActive="border-b-2 border-b-orange-500"
+            [routerLinkActiveOptions]="{exact:true}"
+          >Cart</a>
           </li>
         </ul>
         <div class=" sm:flex sm:flex-row sm:space-x-6 space-x-3 ">
