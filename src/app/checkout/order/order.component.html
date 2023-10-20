@@ -35,6 +35,11 @@
           <p>{{tax | number: '1.2-2'}} $</p>
 
         </div>
+        <!--      shipment cost-->
+        <div class="flex justify-between mb-2">
+          <p class="text-gray-400">shipment cost</p>
+          <p>{{shipmentCost}} $</p>
+        </div>
         <!--      subtotal + tax -->
         <div class="flex justify-between mb-2">
           <p class="text-gray-400">total</p>
@@ -46,11 +51,7 @@
           <p class="text-gray-400">discount</p>
           <p>{{discountPercentage * 100 }} %</p>
         </div>
-        <!--      shipment cost-->
-        <div class="flex justify-between mb-2">
-          <p class="text-gray-400">shipment cost</p>
-          <p>5 $</p>
-        </div>
+
       </div>
       <div class="border-b border-b-gray-300 mb-4"></div>
 
@@ -61,7 +62,11 @@
           <p class="text-lg font-semibold">{{grandTotal | number: '1.2-2'}}$</p>
         </div>
         <div class="w-full mt-6 ">
-          <button class="w-full bg-orange-500 p-2 rounded-md text-white text-lg font-bold ">pay</button>
+          <button [disabled]="!submitBtnState"
+                  [ngClass]="{'bg-orange-200': !submitBtnState ,'bg-orange-500': submitBtnState}"
+                  (click)="pay()"
+                  class="w-full  p-2 rounded-md text-white text-lg font-bold ">pay
+          </button>
         </div>
       </div>
     </div>

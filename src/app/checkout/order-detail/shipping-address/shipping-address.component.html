@@ -1,52 +1,98 @@
 <div class=" flex flex-col ">
+  <form (ngSubmit)="onSubmit(FORM)" #FORM=ngForm>
+    <div class="flex flex-col justify-start px-4 mb-4">
+      <label for="fullname" class="text-lg">fullname</label>
+      <input
+        (input)="textInter()"
+        id="fullname"
+        name="fullname"
+        placeholder="fullname"
+        class="border border-gray-300 rounded-md p-2"
+        type="text"
+        required
+        ngModel>
+    </div>
 
-  <div class="flex flex-col justify-start px-4 mb-4">
-    <label for="fullname" class="text-lg">fullname</label>
-    <input id="fullname" placeholder="fullname" class="border border-gray-300 rounded-md p-2" type="text">
-  </div>
+    <div class="flex flex-col justify-start px-4 mb-4">
+      <label for="email" class="text-lg">email</label>
+      <input
+        (input)="textInter()"
+        id="email"
+        name="email"
+        placeholder="email"
+        class="border border-gray-300 rounded-md p-2"
+        type="text"
+        required
+        ngModel>
+    </div>
 
-  <div class="flex flex-col justify-start px-4 mb-4">
-    <label for="email" class="text-lg">email</label>
-    <input id="email" placeholder="email" class="border border-gray-300 rounded-md p-2" type="text">
-  </div>
 
-  <div class="flex flex-col justify-start px-4 mb-4">
-    <label for="phone" class="text-lg">phone</label>
-    <input id="phone" placeholder="phone" class="border border-gray-300 rounded-md p-2" type="text">
-  </div>
+    <div class="ml-4 w-auto mr-4 mb-4">
+      <div>
+        <button
+          (click)="toggleDropDown()"
+          class="text-white  justify-between w-full bg-orange-500 rounded-lg text-sm px-5 py-2.5
+          text-center inline-flex items-center "
+          type="button">countries
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor"
+               class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+          </svg>
 
-  <div class="ml-4 w-auto mr-4 mb-4">
-   <div>
-     <button
-       class="text-white  justify-between w-full bg-orange-500 rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center "
-       type="button">Dropdown button
-       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-       </svg>
+        </button>
+        <!-- Dropdown menu -->
+        <div *ngIf="isOpened" id="dropdown" class="rounded-lg shadow w-auto ">
+          <ul class="p-2 ">
+            <div *ngFor="let cou of allCountries" (click)="selectCountry(cou)">
+              <li class="my-2 border-b-2 border-b-gray-100">
+                {{cou.name}}
+              </li>
 
-     </button>
-     <!-- Dropdown menu -->
-     <div id="dropdown" class="rounded-lg shadow w-auto ">
-       <ul class="py-2 " >
-         <li>
-           <a href="#" class="block px-4 py-2  ">Dashboard</a>
-         </li>
-         <li>
-           <a href="#" class="block px-4 py-2 ">Settings</a>
-         </li>
-         <li>
-           <a href="#" class="block px-4 py-2 ">Earnings</a>
-         </li>
-         <li>
-           <a href="#" class="block px-4 py-2 ">Sign out</a>
-         </li>
-       </ul>
-     </div>
-   </div>
-  </div>
-  <div class="flex flex-col justify-start px-4 mb-4">
-    <label for="city" class="text-lg">city</label>
-    <input id="city" placeholder="city" class="border border-gray-300 rounded-md p-2" type="text">
-  </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
 
+    <div class="flex flex-col justify-start px-4 mb-4">
+      <label for="phone" class="text-lg">phone</label>
+      <div class="flex">
+        <span class="border border-gray-300 rounded-md p-2">{{selectedCountry.phoneNumber}}</span>
+        <input
+          (input)="textInter()"
+          id="phone"
+          name="phone"
+          placeholder="XXX-XXX-XXXX"
+          class="flex-grow border border-gray-300 rounded-md p-2"
+          type="tel"
+          required
+          oninput="this.value = this.value.replace(/\D/g, '')"
+          ngModel>
+      </div>
+    </div>
+
+
+    <div class="flex flex-col justify-start px-4 mb-4">
+      <label for="city" class="text-lg">city</label>
+      <input
+        (input)="textInter()"
+        id="city"
+        name="city"
+        placeholder="city"
+        class="border border-gray-300 rounded-md p-2"
+        type="text"
+        required
+        ngModel>
+    </div>
+
+
+    <div class="flex justify-center items-center mb-3">
+      <button
+        class="border border-orange-500 rounded-md py-1.5 bg-orange-500 text-white px-3.5 "
+        type="submit">save
+      </button>
+
+    </div>
+  </form>
 </div>
