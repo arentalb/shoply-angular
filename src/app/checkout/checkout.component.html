@@ -2,38 +2,39 @@
   <div class="flex flex-col ">
     <div class="">
       <!--breadcrumb -->
-      <div class="pb-8">
-        <nav class="flex" >
-          <ol class="inline-flex items-center space-x-1 md:space-x-3">
-            <li class="inline-flex items-center">
-              <a href="#" class="inline-flex items-center text-lg font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+      <!--breadcrumb -->
+      <div class="pb-4 md:pb-8">
+        <nav class="flex">
+          <ol class="flex items-center justify-center ">
+            <li class="mr-2">
+              <a [routerLink]="['/']" class="text-gray-600 font-bold">
                 Home
               </a>
             </li>
-
             <li>
-              <div class="flex items-center">
-                <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+              <div class="flex justify-center items-center  ">
+                <svg class="w-4  h-4 mt-1 text-gray-400 mr-2" fill="none" stroke="currentColor"
+                     stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.25 4.5l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <a href="#" class="ml-1 text-lgsm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Cart</a>
+                <a [routerLink]="['/cart','myCart']" class=" text-gray-400 font-semibold mr-2">
+                  cart
+                </a>
+                <svg class="w-4  h-4 mt-1 text-gray-400 mr-2" fill="none" stroke="currentColor"
+                     stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.25 4.5l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <a [routerLink]="['/checkout']" class=" text-gray-400 font-semibold mr-2">
+                  checkout
+                </a>
               </div>
             </li>
-
-            <li>
-              <div class="flex items-center">
-                <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                </svg>
-                <a href="#" class="ml-1 text-lgsm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Checkout</a>
-              </div>
-            </li>
-
           </ol>
         </nav>
       </div>
+
     </div>
-    <div  class="flex flex-col sm:flex-row ">
+    <div class="flex flex-col sm:flex-row ">
       <div class="w-full md:w-3/5">
         <app-order-detail></app-order-detail>
 

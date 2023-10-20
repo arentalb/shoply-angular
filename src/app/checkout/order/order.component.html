@@ -1,53 +1,69 @@
 <div class="  my-10 p-4 flex justify-center  md:my-0 md:mx-16">
- <div class="md:w-96 border-2 border-gray-200 md:p-6 p-10 rounded-md">
-   <div>
-     <p class="text-2xl">your order </p>
-   </div >
-   <div class="mb-6">
-     <app-order-card></app-order-card>
-     <app-order-card></app-order-card>
-   </div>
-   <div>
-     <!--    coppen-->
-     <div class="mb-4">
-       <p class="text-lg">discount copen </p>
-       <div class="flex justify-between">
-         <input class="border border-gray-300 rounded-md py-1.5 px-2.5" type="text" placeholder="add discount code ">
-         <button class="border border-orange-500 rounded-md py-1.5 text-orange-500 px-3.5 ">apply</button>
-       </div>
-     </div>
-     <div class="border-b border-b-gray-300 mb-4"></div>
-     <!--    detail-->
-     <div class="mb-4">
-       <!--      subtotal-->
-       <div class="flex justify-between mb-2">
-         <p class="text-gray-400">subtotal</p>
-         <p>12 $</p>
+  <div class="md:w-96 border-2 border-gray-200 md:p-6 p-10 rounded-md">
+    <div>
+      <p class="text-2xl">your order </p>
+    </div>
+    <div class="" *ngFor=" let pro of productsInTheCart">
+      <app-order-card [cardItem]="pro"></app-order-card>
+    </div>
+    <div class="mt-4">
+      <!--    coppen-->
+      <div class="mb-4">
+        <p class="text-lg">discount copen </p>
+        <div class="flex justify-between">
+          <input #cuppon class="border border-gray-300 rounded-md py-1.5 px-2.5" type="text"
+                 placeholder="add discount code ">
+          <button (click)="applyCuppon(cuppon.value)"
+                  class="border border-orange-500 rounded-md py-1.5 bg-orange-500 text-white px-3.5 ">apply
+          </button>
+        </div>
+        <p *ngIf="coupon !==''">applied coupon '{{coupon}}' and {{discountPercentage * 100 | number: '1.2-2'}}%</p>
+      </div>
+      <div class="border-b border-b-gray-300 mb-4"></div>
+      <!--    detail-->
+      <div class="mb-4">
+        <!--      subtotal-->
+        <div class="flex justify-between mb-2">
+          <p class="text-gray-400">subtotal </p>
+          <p>{{subTotal | number: '1.2-2'}} $</p>
 
-       </div >
-       <!--      discount-->
-       <div class="flex justify-between mb-2">
-         <p class="text-gray-400">discount</p>
-         <p>2 $</p>
-       </div>
-       <!--      shipment cost-->
-       <div class="flex justify-between mb-2">
-         <p class="text-gray-400">shipment cost</p>
-         <p>5 $</p>
-       </div>
-     </div>
-     <div class="border-b border-b-gray-300 mb-4"></div>
+        </div>
 
-     <!--    final prosess-->
-     <div>
-       <div class="flex justify-between mb-2">
-         <p class="text-2xl font-bold">grand total</p>
-         <p class="text-lg font-semibold">5 $</p>
-       </div>
-       <div class="w-full mt-6 ">
-         <button class="w-full bg-orange-500 p-2 rounded-md text-white text-lg font-bold ">pay</button>
-       </div>
-     </div>
-   </div>
- </div>
+        <!--      tax-->
+        <div class="flex justify-between mb-2">
+          <p class="text-gray-400"> tax </p>
+          <p>{{tax | number: '1.2-2'}} $</p>
+
+        </div>
+        <!--      subtotal + tax -->
+        <div class="flex justify-between mb-2">
+          <p class="text-gray-400">total</p>
+          <p>{{total | number: '1.2-2'}} $</p>
+
+        </div>
+        <!--      discount-->
+        <div class="flex justify-between mb-2">
+          <p class="text-gray-400">discount</p>
+          <p>{{discountPercentage * 100 }} %</p>
+        </div>
+        <!--      shipment cost-->
+        <div class="flex justify-between mb-2">
+          <p class="text-gray-400">shipment cost</p>
+          <p>5 $</p>
+        </div>
+      </div>
+      <div class="border-b border-b-gray-300 mb-4"></div>
+
+      <!--    final prosess-->
+      <div>
+        <div class="flex justify-between mb-2">
+          <p class="text-2xl font-bold">grand total</p>
+          <p class="text-lg font-semibold">{{grandTotal | number: '1.2-2'}}$</p>
+        </div>
+        <div class="w-full mt-6 ">
+          <button class="w-full bg-orange-500 p-2 rounded-md text-white text-lg font-bold ">pay</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
