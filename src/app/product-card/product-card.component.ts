@@ -3,6 +3,7 @@ import {Product} from "../models/product";
 import {CartService} from "../services/cart.service";
 import {Size} from "../enums/size";
 import {CartItem} from "../models/cart-item";
+import {FavorateService} from "../services/favorate.service";
 
 @Component({
   selector: 'app-product-card',
@@ -11,7 +12,7 @@ import {CartItem} from "../models/cart-item";
 })
 export class ProductCardComponent implements OnInit {
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private favorateservice: FavorateService) {
   }
 
   @Input() product: Product
@@ -44,6 +45,12 @@ export class ProductCardComponent implements OnInit {
 
     let pro: CartItem = {product: this.product, quantity: this.psc, selectedSize: this.defaultSize}
     this.cartService.addProduct(pro)
+  }
+
+  addToFavorate(product: Product) {
+    this.favorateservice.addToFavorate(product)
+    console.log("addes to favorate ")
+    console.log(product)
   }
 
   dec() {

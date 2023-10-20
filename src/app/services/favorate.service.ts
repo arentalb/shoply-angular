@@ -1,33 +1,31 @@
 import {Injectable} from '@angular/core';
 import {Product} from "../models/product";
-import {ProductService} from "./product.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavorateService {
 
-  constructor(private productservice: ProductService) {
+  constructor() {
   }
 
   favorateProducts: Product[] = []
 
   getFavorateProducts() {
-    this.favorateProducts = this.productservice.getAllProducts()
     return this.favorateProducts
   }
 
   addToFavorate(product: Product) {
-
+    this.favorateProducts.push(product)
   }
 
   removeFromFavorate(product: Product) {
-    let index = this.favorateProducts.findIndex((pro) => {
-      pro === product
-    })
+    let index = this.favorateProducts.findIndex((pro) => pro === product);
+
     if (index !== -1) {
       this.favorateProducts.splice(index, 1);
     }
+
   }
 
 }
