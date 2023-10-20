@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Product} from "../../models/product";
 
 @Component({
   selector: 'app-favorate-detail',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./favorate-detail.component.css']
 })
 export class FavorateDetailComponent {
+
+  favorateProducts: Product[] = []
 
 }
